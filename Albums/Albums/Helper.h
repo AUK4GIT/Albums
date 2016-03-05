@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
 @interface Helper : NSObject
 + (instancetype)sharedInstance;
@@ -14,4 +15,6 @@
 - (void)fetchAlbumsFromDB: (void (^)(NSArray *))completionBlock;
 - (void)fetchAlbumsFromService:(void (^)(NSArray *))completionBlock;
 - (void)fetchPhotosFromServiceForAlbumId:(NSString *)albumId forAlbum:(id)album completionHandler:(void (^)(NSArray *))completionBlock;
+- (void)fetchImageWithURLString:(NSString *)urlString completionHandler:(void (^)(UIImage *))completionBlock;
+
 @end

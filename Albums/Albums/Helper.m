@@ -109,5 +109,19 @@
     
 }
 
+- (void)fetchImageWithURLString:(NSString *)urlString completionHandler:( void (^)(UIImage *))completionBlock {
+    NSURL *photoURL = [[NSURL alloc] initWithString:urlString];
+    NSURLSessionDownloadTask *downloadPhotoTask = [[NSURLSession sharedSession]
+                                                   downloadTaskWithURL:photoURL completionHandler:^(NSURL *location, NSURLResponse *response, NSError *error) {
+                                                       // 3
+                                                       UIImage *downloadedImage = [UIImage imageWithData:
+                                                                                   [NSData dataWithContentsOfURL:location]];
+                                                       dispatch_async(dispatch_get_main_queue(), ^{
+                                                           completionBlock(downloadedImage);
+                                                       });
+                                                   }];
+    
+    [downloadPhotoTask resume];
+}
 
 @end
