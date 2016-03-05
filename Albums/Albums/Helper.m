@@ -35,6 +35,10 @@
     completionBlock([modelCoordinator fetchAlbums]);
 }
 
+- (void)fetchPhotosFromDBForAlbumId:(NSString *)albumId withCompletionHandler:(void (^)(NSArray *))completionBlock {
+    completionBlock([modelCoordinator fetchAlbums]);
+}
+
 - (void)fetchAlbumsFromService:(void (^)(NSArray *))completionBlock {
     
     NSURL *albumURL = [[NSURL alloc] initWithString:@"http://jsonplaceholder.typicode.com/albums"];
@@ -78,6 +82,31 @@
     }];
     [dataTask resume];
 
+}
+
+- (void)fetchPhotosFromServiceForAlbumId:(NSString *)albumId forAlbum:(id)album completionHandler:(void (^)(NSArray *))completionBlock {
+    
+    NSURL *albumURL = [[NSURL alloc] initWithString:[NSString stringWithFormat:@"http://jsonplaceholder.typicode.com/photos/?albumId=%@",albumId]];
+    NSLog(@"albumURL:  %@",albumURL);
+    NSURLSessionConfiguration *sessionConfig=[NSURLSessionConfiguration defaultSessionConfiguration];
+    NSURLSession *session=[NSURLSession sessionWithConfiguration:sessionConfig delegate:nil delegateQueue:nil];
+    NSURLSessionDataTask *dataTask=[session dataTaskWithURL:albumURL completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+        NSError *jsonError = nil;
+        NSArray *photos = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+        
+        if (jsonError) {
+            NSLog(@"error is %@", [jsonError localizedDescription]);
+            // Handle Error and return
+        } else {
+            [modelCoordinator saveToDBPhotos:(NSArray *)photos forAlbum:(id)album];
+        }
+        dispatch_async(dispatch_get_main_queue(), ^{
+            completionBlock([modelCoordinator fetchPhotosForAlbumId:albumId]);
+        });
+        
+    }];
+    [dataTask resume];
+    
 }
 
 

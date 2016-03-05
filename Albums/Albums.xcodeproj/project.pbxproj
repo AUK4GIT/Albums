@@ -48,6 +48,7 @@
 		ED73B35F1C8ABE6D008891C0 /* Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = ED73B35E1C8ABE6D008891C0 /* Helper.m */; };
 		ED73B3601C8ABE6D008891C0 /* Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = ED73B35E1C8ABE6D008891C0 /* Helper.m */; };
 		ED73B3611C8ABE6D008891C0 /* Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = ED73B35E1C8ABE6D008891C0 /* Helper.m */; };
+		ED73B3681C8B287B008891C0 /* ThumnailViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = ED73B3671C8B287B008891C0 /* ThumnailViewCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -105,6 +106,8 @@
 		ED73B3591C8ABE32008891C0 /* PhotoViewerVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PhotoViewerVC.m; path = PhotoViewerVC/PhotoViewerVC.m; sourceTree = "<group>"; };
 		ED73B35D1C8ABE6D008891C0 /* Helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Helper.h; sourceTree = "<group>"; };
 		ED73B35E1C8ABE6D008891C0 /* Helper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Helper.m; sourceTree = "<group>"; };
+		ED73B3661C8B287B008891C0 /* ThumnailViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ThumnailViewCell.h; path = views/ThumnailViewCell.h; sourceTree = "<group>"; };
+		ED73B3671C8B287B008891C0 /* ThumnailViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ThumnailViewCell.m; path = views/ThumnailViewCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -155,6 +158,7 @@
 		A4FDB08F1C89FAA600CD25DB /* Albums */ = {
 			isa = PBXGroup;
 			children = (
+				ED73B3621C8B2822008891C0 /* views */,
 				ED73B34A1C8ABD56008891C0 /* Controllers */,
 				ED73B3261C8ABA01008891C0 /* Models */,
 				A4FDB0931C89FAA700CD25DB /* AppDelegate.h */,
@@ -253,6 +257,15 @@
 				ED73B3591C8ABE32008891C0 /* PhotoViewerVC.m */,
 			);
 			name = PhotosViewerVC;
+			sourceTree = "<group>";
+		};
+		ED73B3621C8B2822008891C0 /* views */ = {
+			isa = PBXGroup;
+			children = (
+				ED73B3661C8B287B008891C0 /* ThumnailViewCell.h */,
+				ED73B3671C8B287B008891C0 /* ThumnailViewCell.m */,
+			);
+			name = views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -395,6 +408,7 @@
 				A4FDB0921C89FAA600CD25DB /* main.m in Sources */,
 				A4FDB09E1C89FAA700CD25DB /* Albums.xcdatamodeld in Sources */,
 				ED73B3501C8ABDCD008891C0 /* AlbumListsViewController.m in Sources */,
+				ED73B3681C8B287B008891C0 /* ThumnailViewCell.m in Sources */,
 				ED73B3361C8ABA43008891C0 /* Albums.m in Sources */,
 				ED73B35F1C8ABE6D008891C0 /* Helper.m in Sources */,
 				ED73B35A1C8ABE32008891C0 /* PhotoViewerVC.m in Sources */,

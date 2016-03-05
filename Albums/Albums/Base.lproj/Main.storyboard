@@ -38,7 +38,7 @@
                                     </subviews>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <segue destination="Crh-Pe-pHe" kind="show" id="X5A-Vs-olM"/>
+                                    <segue destination="Crh-Pe-pHe" kind="show" identifier="Thumbnail" id="X5A-Vs-olM"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -70,15 +70,28 @@
                             <inset key="sectionInset" minX="10" minY="10" maxX="10" maxY="10"/>
                         </collectionViewFlowLayout>
                         <cells>
-                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="CCell" id="iFd-PL-YPL">
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" restorationIdentifier="ThumnailViewCell" reuseIdentifier="ThumbnailCell" id="iFd-PL-YPL" customClass="ThumnailViewCell">
                                 <rect key="frame" x="10" y="74" width="100" height="100"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                     <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="100" placeholderIntrinsicHeight="100" translatesAutoresizingMaskIntoConstraints="NO" id="BPN-iX-3jH">
+                                            <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
+                                            <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                        </imageView>
+                                    </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="BPN-iX-3jH" firstAttribute="centerX" secondItem="iFd-PL-YPL" secondAttribute="centerX" id="Ill-lS-RFI"/>
+                                    <constraint firstItem="BPN-iX-3jH" firstAttribute="centerY" secondItem="iFd-PL-YPL" secondAttribute="centerY" id="Se3-Hx-QgU"/>
+                                </constraints>
+                                <connections>
+                                    <outlet property="thumnailImageView" destination="BPN-iX-3jH" id="WDt-fe-9Fb"/>
+                                </connections>
                             </collectionViewCell>
                         </cells>
                         <connections>

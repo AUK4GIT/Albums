@@ -14,7 +14,7 @@
 @implementation Photos (CoreDataProperties)
 
 @dynamic photoId;
-@dynamic userId;
+@dynamic albumId;
 @dynamic title;
 @dynamic photoURL;
 @dynamic photoThumbnailURL;

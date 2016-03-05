@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Albums.h"
 
 @interface ThumbnailsVC : UICollectionViewController
-
+@property(nonatomic, weak) Albums *album;
 @end

@@ -7,25 +7,56 @@
 //
 
 #import "ThumbnailsVC.h"
+#import "ThumnailViewCell.h"
+#import "Helper.h"
+#import "Photos.h"
 
 @interface ThumbnailsVC ()
-
+@property(nonatomic, weak) Helper *helper;
+@property(nonatomic, strong) NSArray *photos;
 @end
 
 @implementation ThumbnailsVC
 
-static NSString * const reuseIdentifier = @"CCell";
+static NSString * const reuseIdentifier = @"ThumbnailCell";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
     // Uncomment the following line to preserve selection between presentations
-    // self.clearsSelectionOnViewWillAppear = NO;
-    
-    // Register cell classes
-    [self.collectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:reuseIdentifier];
-    
+     self.clearsSelectionOnViewWillAppear = NO;
+    self.title = self.album.albumTitle;
+    self.helper = [Helper sharedInstance];
     // Do any additional setup after loading the view.
+    NSSet *pSet = [self.album valueForKey:@"photos"];
+    NSLog(@"AlbumId: %ld  %d",pSet.count, self.album.photos == NULL);
+    if (pSet.count == 0) {
+        [self fetchPhotosFromService];
+    } else {
+        self.photos = [pSet allObjects];
+    }
+}
+
+- (void)fetchPhotosFromService {
+    
+    [self.helper fetchPhotosFromServiceForAlbumId:self.album.albumId.stringValue forAlbum:self.album completionHandler:^(NSArray * dbPhotos) {
+        if (dbPhotos.count > 0) {
+            self.photos = [NSArray arrayWithArray:dbPhotos];
+            
+//            NSSet *pSet = [self.album valueForKey:@"photos"];
+//            NSLog(@"AlbumId: %ld  %d",pSet.count, self.album.photos == NULL);
+//            if (pSet.count == 0) {
+//                [self fetchPhotosFromService];
+//            } else {
+//                self.photos = [pSet allObjects];
+//            }
+            
+            [self.collectionView reloadData];
+        } else {
+            //show Alert. No Albums found
+        }
+    }];
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -51,14 +82,15 @@ static NSString * const reuseIdentifier = @"CCell";
 
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return 5;
+    return self.photos.count;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
+    ThumnailViewCell *cell = (ThumnailViewCell *)[collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
     
     // Configure the cell
-    
+    Photos *photo = (Photos *)self.photos[indexPath.row];
+    [cell loadThumbNailWithURL:photo.photoThumbnailURL];
     return cell;
 }
 

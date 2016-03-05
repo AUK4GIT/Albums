@@ -16,7 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface Photos (CoreDataProperties)
 
 @property (nullable, nonatomic, retain) NSNumber *photoId;
-@property (nullable, nonatomic, retain) NSNumber *userId;
+@property (nullable, nonatomic, retain) NSNumber *albumId;
 @property (nullable, nonatomic, retain) NSString *title;
 @property (nullable, nonatomic, retain) NSString *photoURL;
 @property (nullable, nonatomic, retain) NSString *photoThumbnailURL;

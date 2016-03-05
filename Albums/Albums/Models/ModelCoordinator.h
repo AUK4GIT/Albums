@@ -14,4 +14,6 @@
 
 - (NSArray *)fetchAlbums;
 - (void)saveToDBUsers:(NSArray *)users andAlbums:(NSArray *)albums;
+- (void)saveToDBPhotos:(NSArray *)users forAlbum:(id)album;
+- (NSArray *)fetchPhotosForAlbumId:(NSString *)albumId;
 @end

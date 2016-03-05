@@ -13,4 +13,5 @@
 
 - (void)fetchAlbumsFromDB: (void (^)(NSArray *))completionBlock;
 - (void)fetchAlbumsFromService:(void (^)(NSArray *))completionBlock;
+- (void)fetchPhotosFromServiceForAlbumId:(NSString *)albumId forAlbum:(id)album completionHandler:(void (^)(NSArray *))completionBlock;
 @end

@@ -26,6 +26,23 @@
 
 - (NSArray *)fetchAlbums {
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Albums"];
+    NSSortDescriptor *sortDesc = [NSSortDescriptor sortDescriptorWithKey:@"albumId" ascending:true];
+    request.sortDescriptors = @[sortDesc];
+    NSError *error = nil;
+    NSArray *results = [managedContext executeFetchRequest:request error:&error];
+    if (!results) {
+        NSLog(@"Error fetching Employee objects: %@\n%@", [error localizedDescription], [error userInfo]);
+        abort();
+    }
+    return results == nil ? @[] : results;
+}
+
+- (NSArray *)fetchPhotosForAlbumId:(NSString *)albumId {
+    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Photos"];
+    NSSortDescriptor *sortDesc = [NSSortDescriptor sortDescriptorWithKey:@"photoId" ascending:true];
+    NSPredicate *predic = [NSPredicate predicateWithFormat:@"albumId == %@",albumId];
+    request.sortDescriptors = @[sortDesc];
+    request.predicate = predic;
     NSError *error = nil;
     NSArray *results = [managedContext executeFetchRequest:request error:&error];
     if (!results) {
@@ -38,6 +55,7 @@
 - (void)saveToDBUsers:(NSArray *)users andAlbums:(NSArray *)albums{
     [self deleteData:@"Albums"];
     [self deleteData:@"Users"];
+    [self deleteData:@"Photos"];
     [self saveContext];
     for (NSDictionary *albumDict in albums) {
         NSEntityDescription *entityPerson = [NSEntityDescription entityForName:@"Albums" inManagedObjectContext:managedContext];
@@ -53,6 +71,21 @@
     }
     [self saveContext];
 }
+
+- (void)saveToDBPhotos:(NSArray *)photos forAlbum:(id)album{
+    NSManagedObject *albumObj = (NSManagedObject *)album;
+    NSMutableSet *mSet = [NSMutableSet set];
+    for (NSDictionary *photoDict in photos) {
+        NSEntityDescription *entityPerson = [NSEntityDescription entityForName:@"Photos" inManagedObjectContext:managedContext];
+        Photos *photo = (Photos *)[[NSManagedObject alloc] initWithEntity:entityPerson insertIntoManagedObjectContext:managedContext];
+        [photo saveData:(NSDictionary *)photoDict];
+        [mSet addObject:photo];
+    }
+    [albumObj setValue:[NSSet setWithSet:mSet] forKey:@"photos"];
+    [self saveContext];
+}
+
+
 
 - (void)deleteData:(NSString *)entity {
     NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:entity];

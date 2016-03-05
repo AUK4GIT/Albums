@@ -7,6 +7,7 @@
 //
 
 #import "AlbumListsViewController.h"
+#import "ThumbnailsVC.h"
 #import "Helper.h"
 #import "Albums.h"
 
@@ -62,6 +63,16 @@
     }];
 }
 
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([segue.identifier isEqualToString:@"Thumbnail"]) {
+        NSIndexPath *path = [self.tableView indexPathForSelectedRow];
+        Albums *album = (Albums *)[self.albums objectAtIndex:path.row];
+        ThumbnailsVC *destVC = segue.destinationViewController;
+        destVC.album = album;
+    }
+}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -72,8 +83,6 @@
     return self.albums.count;
 }
 
-
-
 - (UITableViewCell *)tableView:(UITableView *)tableView
          cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -83,7 +92,6 @@
     Albums *album = (Albums *)[self.albums objectAtIndex:indexPath.row];
     cell.textLabel.text = album.albumTitle;
     cell.detailTextLabel.text = album.userName;
-    
 
     return cell;
 }
