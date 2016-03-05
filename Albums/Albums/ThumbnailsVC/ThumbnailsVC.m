@@ -14,7 +14,7 @@
 
 @implementation ThumbnailsVC
 
-static NSString * const reuseIdentifier = @"Cell";
+static NSString * const reuseIdentifier = @"CCell";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
