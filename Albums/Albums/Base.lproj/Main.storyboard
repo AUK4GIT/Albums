@@ -106,7 +106,48 @@
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ujK-Mu-unM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1188.5" y="69.5"/>
+            <point key="canvasLocation" x="1228.5" y="69.5"/>
+        </scene>
+        <!--Photo ViewerVC-->
+        <scene sceneID="esE-L8-PKt">
+            <objects>
+                <viewController storyboardIdentifier="PhotoViewerVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="04H-Iy-t2w" customClass="PhotoViewerVC" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="ge9-DK-0BH"/>
+                        <viewControllerLayoutGuide type="bottom" id="f04-w8-TE0"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="d4l-Fu-5u5">
+                        <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dYZ-Kl-S5r">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="200" placeholderIntrinsicHeight="200" translatesAutoresizingMaskIntoConstraints="NO" id="0bz-Nf-AWK">
+                                <rect key="frame" x="87" y="201.5" width="200" height="200"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="dYZ-Kl-S5r" firstAttribute="leading" secondItem="d4l-Fu-5u5" secondAttribute="leading" id="4Vb-eu-9mN"/>
+                            <constraint firstItem="0bz-Nf-AWK" firstAttribute="centerY" secondItem="d4l-Fu-5u5" secondAttribute="centerY" id="Lqt-iV-3uP"/>
+                            <constraint firstAttribute="trailing" secondItem="dYZ-Kl-S5r" secondAttribute="trailing" id="Y2z-Dt-7TA"/>
+                            <constraint firstItem="dYZ-Kl-S5r" firstAttribute="top" secondItem="ge9-DK-0BH" secondAttribute="bottom" id="kgs-cr-sT5"/>
+                            <constraint firstItem="0bz-Nf-AWK" firstAttribute="centerX" secondItem="d4l-Fu-5u5" secondAttribute="centerX" id="lqm-sf-2lN"/>
+                            <constraint firstItem="f04-w8-TE0" firstAttribute="top" secondItem="dYZ-Kl-S5r" secondAttribute="bottom" id="y5M-NV-iqa"/>
+                        </constraints>
+                    </view>
+                    <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
+                    <navigationItem key="navigationItem" id="XoI-ux-VN6"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                    <connections>
+                        <outlet property="imageView" destination="0bz-Nf-AWK" id="44R-j4-Em6"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="6o2-Yl-2z0" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2211.5" y="69.5"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="f8r-4I-dM9">
@@ -130,6 +171,29 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="w2A-8h-2z3" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="165" y="70"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="ee3-xU-bJQ">
+            <objects>
+                <navigationController storyboardIdentifier="PhotoViewerNVC" automaticallyAdjustsScrollViewInsets="NO" modalPresentationStyle="currentContext" useStoryboardIdentifierAsRestorationIdentifier="YES" id="psg-X7-1SE" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="uFa-qx-97Q">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="barTintColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                        <textAttributes key="titleTextAttributes">
+                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        </textAttributes>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="04H-Iy-t2w" kind="relationship" relationship="rootViewController" id="Ejx-eo-SIW"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="fq3-AI-QAg" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1778" y="69"/>
         </scene>
     </scenes>
 </document>

@@ -7,8 +7,10 @@
 //
 
 #import "PhotoViewerVC.h"
+#import "Helper.h"
 
 @interface PhotoViewerVC ()
+@property (strong, nonatomic) IBOutlet UIImageView *imageView;
 
 @end
 
@@ -17,11 +19,27 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    self.title = @"Photo";
+    
+    [[Helper sharedInstance] fetchImageWithURLString:self.photoURL completionHandler:^(UIImage *image){
+        self.imageView.image = image;
+    }];
+}
+
+- (void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(dismissVC:)];
+    self.navigationItem.rightBarButtonItem.tintColor = [UIColor whiteColor];
+
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+- (IBAction)dismissVC:(id)sender {
+    [self dismissViewControllerAnimated:true completion:nil];
 }
 
 /*

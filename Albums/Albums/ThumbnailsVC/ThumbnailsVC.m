@@ -10,6 +10,7 @@
 #import "ThumnailViewCell.h"
 #import "Helper.h"
 #import "Photos.h"
+#import "PhotoViewerVC.h"
 
 @interface ThumbnailsVC ()
 @property(nonatomic, weak) Helper *helper;
@@ -94,6 +95,15 @@ static NSString * const reuseIdentifier = @"ThumbnailCell";
     return cell;
 }
 
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    UINavigationController *pVC = [self.storyboard instantiateViewControllerWithIdentifier:@"PhotoViewerNVC"];
+    pVC.modalPresentationStyle = UIModalPresentationOverCurrentContext;
+    PhotoViewerVC *nVC = (PhotoViewerVC *)pVC.visibleViewController;
+    Photos *photo = (Photos *)self.photos[indexPath.item];
+    nVC.photoURL = photo.photoURL;
+    [self presentViewController:pVC animated:true completion:nil];
+}
+
 #pragma mark <UICollectionViewDelegate>
 
 /*
@@ -124,5 +134,6 @@ static NSString * const reuseIdentifier = @"ThumbnailCell";
 	
 }
 */
+
 
 @end

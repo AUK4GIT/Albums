@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CustomModalV.h"
 
-@interface PhotoViewerVC : UIViewController
-
+@interface PhotoViewerVC : CustomModalV
+@property(nonatomic, copy) NSString *photoURL;
 @end
