@@ -168,7 +168,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="oKW-FB-4b5" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="hdn-x0-H6K">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="black" id="hdn-x0-H6K">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -192,7 +192,7 @@
                 <navigationController storyboardIdentifier="PhotoViewerNVC" automaticallyAdjustsScrollViewInsets="NO" modalPresentationStyle="currentContext" useStoryboardIdentifierAsRestorationIdentifier="YES" id="psg-X7-1SE" sceneMemberID="viewController">
                     <toolbarItems/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="uFa-qx-97Q">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="black" id="uFa-qx-97Q">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="barTintColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>

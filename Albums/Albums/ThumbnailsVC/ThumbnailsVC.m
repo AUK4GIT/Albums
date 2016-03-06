@@ -46,6 +46,10 @@ static NSString * const reuseIdentifier = @"ThumbnailCell";
     }
 }
 
+//- (UIStatusBarStyle)preferredStatusBarStyle {
+//    return UIStatusBarStyleLightContent;
+//}
+
 - (void)fetchPhotosFromService {
     [self.activityIndicator startAnimating];
     [self.helper fetchPhotosFromServiceForAlbumId:self.album.albumId.stringValue forAlbum:self.album completionHandler:^(NSArray * dbPhotos) {
