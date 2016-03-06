@@ -63,31 +63,45 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="20" minimumInteritemSpacing="20" id="ysr-mI-q58">
-                            <size key="itemSize" width="100" height="100"/>
+                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="8" minimumInteritemSpacing="8" id="ysr-mI-q58">
+                            <size key="itemSize" width="96" height="96"/>
                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                            <inset key="sectionInset" minX="10" minY="10" maxX="10" maxY="10"/>
+                            <inset key="sectionInset" minX="8" minY="8" maxX="8" maxY="8"/>
                         </collectionViewFlowLayout>
                         <cells>
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" restorationIdentifier="ThumnailViewCell" reuseIdentifier="ThumbnailCell" id="iFd-PL-YPL" customClass="ThumnailViewCell">
-                                <rect key="frame" x="10" y="74" width="100" height="100"/>
+                                <rect key="frame" x="8" y="72" width="96" height="96"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                    <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="96" height="96"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="100" placeholderIntrinsicHeight="100" translatesAutoresizingMaskIntoConstraints="NO" id="BPN-iX-3jH">
-                                            <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
-                                            <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                        </imageView>
+                                        <view tag="5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0gY-19-76I">
+                                            <rect key="frame" x="0.0" y="0.0" width="96" height="96"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="100" placeholderIntrinsicHeight="100" translatesAutoresizingMaskIntoConstraints="NO" id="BPN-iX-3jH">
+                                                    <rect key="frame" x="0.0" y="0.0" width="96" height="96"/>
+                                                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                                </imageView>
+                                            </subviews>
+                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <constraints>
+                                                <constraint firstItem="BPN-iX-3jH" firstAttribute="leading" secondItem="0gY-19-76I" secondAttribute="leading" id="BQp-8V-fUB"/>
+                                                <constraint firstItem="BPN-iX-3jH" firstAttribute="top" secondItem="0gY-19-76I" secondAttribute="top" id="fjd-3X-Un7"/>
+                                                <constraint firstAttribute="bottom" secondItem="BPN-iX-3jH" secondAttribute="bottom" id="lhR-UK-RdU"/>
+                                                <constraint firstAttribute="trailing" secondItem="BPN-iX-3jH" secondAttribute="trailing" id="q59-fW-nUq"/>
+                                            </constraints>
+                                        </view>
                                     </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
-                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" red="0.96730981689999995" green="0.96730981689999995" blue="0.96730981689999995" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstItem="BPN-iX-3jH" firstAttribute="centerX" secondItem="iFd-PL-YPL" secondAttribute="centerX" id="Ill-lS-RFI"/>
-                                    <constraint firstItem="BPN-iX-3jH" firstAttribute="centerY" secondItem="iFd-PL-YPL" secondAttribute="centerY" id="Se3-Hx-QgU"/>
+                                    <constraint firstAttribute="bottom" secondItem="0gY-19-76I" secondAttribute="bottom" id="LKz-hR-k7X"/>
+                                    <constraint firstItem="0gY-19-76I" firstAttribute="top" secondItem="iFd-PL-YPL" secondAttribute="top" id="Nwg-L8-dMB"/>
+                                    <constraint firstItem="0gY-19-76I" firstAttribute="leading" secondItem="iFd-PL-YPL" secondAttribute="leading" id="Sna-kN-VKK"/>
+                                    <constraint firstAttribute="trailing" secondItem="0gY-19-76I" secondAttribute="trailing" id="rvT-YJ-8WF"/>
                                 </constraints>
                                 <connections>
                                     <outlet property="thumnailImageView" destination="BPN-iX-3jH" id="WDt-fe-9Fb"/>

@@ -15,6 +15,7 @@
 @interface ThumbnailsVC ()
 @property(nonatomic, weak) Helper *helper;
 @property(nonatomic, strong) NSArray *photos;
+@property(nonatomic, strong) UIActivityIndicatorView *activityIndicator;
 @end
 
 @implementation ThumbnailsVC
@@ -24,13 +25,20 @@ static NSString * const reuseIdentifier = @"ThumbnailCell";
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    self.activityIndicator.tintColor = [UIColor darkGrayColor];
+    [self.view addSubview:self.activityIndicator];
+    [self.view bringSubviewToFront:self.activityIndicator];
+    [self.activityIndicator hidesWhenStopped];
+    self.activityIndicator.center = self.view.center;
+
     // Uncomment the following line to preserve selection between presentations
      self.clearsSelectionOnViewWillAppear = NO;
     self.title = self.album.albumTitle;
     self.helper = [Helper sharedInstance];
     // Do any additional setup after loading the view.
     NSSet *pSet = [self.album valueForKey:@"photos"];
-    NSLog(@"AlbumId: %ld  %d",pSet.count, self.album.photos == NULL);
+    NSLog(@"AlbumId: %ld  %d",(unsigned long)pSet.count, self.album.photos == NULL);
     if (pSet.count == 0) {
         [self fetchPhotosFromService];
     } else {
@@ -39,7 +47,7 @@ static NSString * const reuseIdentifier = @"ThumbnailCell";
 }
 
 - (void)fetchPhotosFromService {
-    
+    [self.activityIndicator startAnimating];
     [self.helper fetchPhotosFromServiceForAlbumId:self.album.albumId.stringValue forAlbum:self.album completionHandler:^(NSArray * dbPhotos) {
         if (dbPhotos.count > 0) {
             self.photos = [NSArray arrayWithArray:dbPhotos];
@@ -56,6 +64,7 @@ static NSString * const reuseIdentifier = @"ThumbnailCell";
         } else {
             //show Alert. No Albums found
         }
+        [self.activityIndicator stopAnimating];
     }];
     
 }
@@ -81,14 +90,13 @@ static NSString * const reuseIdentifier = @"ThumbnailCell";
     return 1;
 }
 
-
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     return self.photos.count;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     ThumnailViewCell *cell = (ThumnailViewCell *)[collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
-    
+    cell.contentView.backgroundColor = [UIColor lightGrayColor];
     // Configure the cell
     Photos *photo = (Photos *)self.photos[indexPath.row];
     [cell loadThumbNailWithURL:photo.photoThumbnailURL];
@@ -102,6 +110,18 @@ static NSString * const reuseIdentifier = @"ThumbnailCell";
     Photos *photo = (Photos *)self.photos[indexPath.item];
     nVC.photoURL = photo.photoURL;
     [self presentViewController:pVC animated:true completion:nil];
+}
+
+- (void)collectionView:(UICollectionView *)collectionView willDisplayCell:(UICollectionViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath {
+    
+//    UIView *bgView = [cell viewWithTag:5.0];
+//    bgView.alpha = 0;
+//    bgView.transform = CGAffineTransformMakeScale(0.75, 0.75);
+//    [UIView animateWithDuration:0.6 delay:0.3 options:UIViewAnimationOptionCurveEaseOut animations:^{
+//     bgView.alpha = 1.0;
+//        bgView.transform = CGAffineTransformIdentity;
+//    } completion:nil];
+
 }
 
 #pragma mark <UICollectionViewDelegate>

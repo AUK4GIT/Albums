@@ -11,6 +11,7 @@
 
 @interface PhotoViewerVC ()
 @property (strong, nonatomic) IBOutlet UIImageView *imageView;
+@property(nonatomic, strong) UIActivityIndicatorView *activityIndicator;
 
 @end
 
@@ -22,8 +23,16 @@
     
     self.title = @"Photo";
     
+    self.activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
+    self.activityIndicator.tintColor = [UIColor whiteColor];
+    [self.view addSubview:self.activityIndicator];
+    [self.view bringSubviewToFront:self.activityIndicator];
+    [self.activityIndicator hidesWhenStopped];
+    self.activityIndicator.center = self.view.center;
+    [self.activityIndicator startAnimating];
     [[Helper sharedInstance] fetchImageWithURLString:self.photoURL completionHandler:^(UIImage *image){
         self.imageView.image = image;
+        [self.activityIndicator stopAnimating];
     }];
 }
 

@@ -13,7 +13,8 @@
 
 @interface AlbumListsViewController ()
 @property(nonatomic, strong) NSArray *albums;
-@property(nonatomic, weak) Helper *helper;
+@property(nonatomic, strong) Helper *helper;
+@property(nonatomic, strong) UIActivityIndicatorView *activityIndicator;
 @end
 
 @implementation AlbumListsViewController{
@@ -25,6 +26,13 @@
     self.title = @"Albums";
 
     self.tableView.rowHeight = 64;
+    
+    self.activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    self.activityIndicator.tintColor = [UIColor darkGrayColor];
+    [self.view addSubview:self.activityIndicator];
+    [self.view bringSubviewToFront:self.activityIndicator];
+    [self.activityIndicator hidesWhenStopped];
+    self.activityIndicator.center = self.view.center;
     
     self.helper = [Helper sharedInstance];
     // Initialize the refresh control.
@@ -40,6 +48,7 @@
 
 - (void)fetchAlbumsFromService {
     
+    [self.activityIndicator startAnimating];
     [self.helper fetchAlbumsFromService:^(NSArray *dbAlbums){
         if (dbAlbums.count > 0) {
             self.albums = dbAlbums;
@@ -48,6 +57,7 @@
             //show Alert. No Albums found
         }
         [self.refreshControl endRefreshing];
+        [self.activityIndicator stopAnimating];
     }];
 }
 

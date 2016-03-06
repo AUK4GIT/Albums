@@ -12,8 +12,17 @@
 @implementation ThumnailViewCell
 
 - (void)loadThumbNailWithURL:(NSString *)urlString {
+//    self.thumnailImageView.image = nil;
+//    self.thumnailImageView.hidden = true;
     [[Helper sharedInstance] fetchImageWithURLString:urlString completionHandler:^(UIImage *image){
         self.thumnailImageView.image = image;
+//        self.thumnailImageView.hidden = false;
     }];
+}
+- (void)prepareForReuse
+{
+    [super prepareForReuse];
+//    self.thumnailImageView.image = nil;
+//    self.thumnailImageView.hidden = true;
 }
 @end
