@@ -46,9 +46,9 @@
     NSURLSessionConfiguration *sessionConfig=[NSURLSessionConfiguration defaultSessionConfiguration];
     NSURLSession *session=[NSURLSession sessionWithConfiguration:sessionConfig delegate:nil delegateQueue:nil];
     NSURLSessionDataTask *dataTask=[session dataTaskWithURL:albumURL completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+        if (error == nil ) {
         NSError *jsonError = nil;
         NSArray *albums = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
-        
         if (jsonError) {
             NSLog(@"error is %@", [jsonError localizedDescription]);
             dispatch_async(dispatch_get_main_queue(), ^{
@@ -75,8 +75,11 @@
                 
             }];
             [dataTask resume];
-            
-            
+        }
+        } else {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                completionBlock([modelCoordinator fetchAlbums]);
+            });
         }
         
     }];
@@ -91,18 +94,24 @@
     NSURLSessionConfiguration *sessionConfig=[NSURLSessionConfiguration defaultSessionConfiguration];
     NSURLSession *session=[NSURLSession sessionWithConfiguration:sessionConfig delegate:nil delegateQueue:nil];
     NSURLSessionDataTask *dataTask=[session dataTaskWithURL:albumURL completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-        NSError *jsonError = nil;
-        NSArray *photos = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
-        
-        if (jsonError) {
-            NSLog(@"error is %@", [jsonError localizedDescription]);
-            // Handle Error and return
+        if (error == nil) {
+            NSError *jsonError = nil;
+            NSArray *photos = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+            if (jsonError) {
+                NSLog(@"error is %@", [jsonError localizedDescription]);
+                // Handle Error and return
+            } else {
+                [modelCoordinator saveToDBPhotos:(NSArray *)photos forAlbum:(id)album];
+            }
+            dispatch_async(dispatch_get_main_queue(), ^{
+                completionBlock([modelCoordinator fetchPhotosForAlbumId:albumId]);
+            });
         } else {
-            [modelCoordinator saveToDBPhotos:(NSArray *)photos forAlbum:(id)album];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                completionBlock([modelCoordinator fetchPhotosForAlbumId:albumId]);
+            });
         }
-        dispatch_async(dispatch_get_main_queue(), ^{
-            completionBlock([modelCoordinator fetchPhotosForAlbumId:albumId]);
-        });
+
         
     }];
     [dataTask resume];
